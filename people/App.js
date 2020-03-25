@@ -32,7 +32,7 @@ const screenOptions = {
       fontSize: 30,
       //flexGrow: 1, Essa propriedade faria o texto ocupar todo o Header, mas
       // na nova versão não funciona e precisei utilizar a propriedade abaixo. 
-      //textAlign: 'center'
+      //headerTitleAlign: 'center'
     },
     headerTitleAlign:'center'
   }  
