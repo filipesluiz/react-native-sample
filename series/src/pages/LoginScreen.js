@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, TextInput} from 'react-native';
 
 export default class LoginScreen extends React.Component {
     render(){
         return(
             <View>
-                <Text>Login</Text>
+                <TextInput>Login</TextInput>
             </View>
         );
     }
