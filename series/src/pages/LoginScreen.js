@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, TextInput, Button, ActivityIndicator, Text} from 'react-native';
+import {View, TextInput, Button, ActivityIndicator, Text, Alert} from 'react-native';
 import FormRow from '../components/FormRow';
 import firebase from '../components/firebase';
 
-function login(login, password, setLoading, setMessage){
+function tryLogin(login, password, setLoading, setMessage){
     setLoading(true);
     firebase.auth().signInWithEmailAndPassword(`${login}`, `${password}`)
         .then(user => {
@@ -11,8 +11,7 @@ function login(login, password, setLoading, setMessage){
             setMessage(null);
         })
         .catch(error => {
-            setMessage("Ocorreu um erro!!!");
-            console.log('erro!', error);
+            setMessage(error.message);
         }).then(user => {
             setLoading(false);
         });
@@ -34,7 +33,7 @@ export default function LoginScreen () {
             <FormRow>
                 <TextInput placeholder="Senha" secureTextEntry value={password} onChangeText={text => onChangePassWord(text)}/>
             </FormRow> 
-            <Button title="Entrar" onPress={() => {login(login, password, setLoading, setMessage)}}/>
+            <Button title="Entrar" onPress={() => {tryLogin(login, password, setLoading, setMessage)}}/>
             {loading ? <ActivityIndicator size="large" color="#ff5959"/>: null}
             {message != null ? <Text>{message}</Text> : null}
         </View>
