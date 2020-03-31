@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     container: {
         padding: 5,
         backgroundColor: '#fff4f2',
-        margin:5,
+        margin:10,
         elevation: 1
     }
 });
