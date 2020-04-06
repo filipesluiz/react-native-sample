@@ -9,7 +9,7 @@ import rootReducer from './reducers'; //read from index.js
 const store = createStore(rootReducer);
 
 export default class TodoListApp extends React.Component {
-    render(){
+  render(){
         return (
           <Provider store={store}>
             <View style={styles.container}>

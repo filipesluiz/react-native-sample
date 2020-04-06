@@ -1,18 +1,26 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, Button} from 'react-native';
+import {connect} from 'react-redux';
+import {addTodo} from '../actions';
 
-export default function TodoForm (){
-    const [taskValue, onChangeTaskValue] = React.useState('');
-    return (
-        <View style={styles.container}>
-            <View style={styles.inputContainer}>
-                <TextInput style={styles.input} onChangeText={text => onChangeTaskValue(text)} />
+class TodoForm extends React.Component {
+    state = {
+        taskValue: ''
+    }
+    
+    render(){
+        //const [taskValue, onChangeTaskValue] = React.useState('');
+        return (
+            <View style={styles.container}>
+                <View style={styles.inputContainer}>
+                    <TextInput style={styles.input} onChangeText={text => {this.setState({taskValue:text})}} />
+                </View>
+                <View style={styles.buttomContainer}>
+                    <Button onPress={() => this.props.dispatchAddList(this.state.taskValue)} title="Add" color="#3f91d1"/>
+                </View>
             </View>
-            <View style={styles.buttomContainer}>
-                <Button onPress={() => console.log('Teste!!!!!')} title="Add" color="#3f91d1"/>
-            </View>
-        </View>
-    );
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -40,3 +48,15 @@ const styles = StyleSheet.create({
         borderColor: '#3f91d1'
     }
 });
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         dispatchAddList: text => addTodo(text);
+//     }
+// } Its equals 
+// const mapDispatchToProps = {
+//     dispatchAddList: addTodo
+// }
+
+//export default connect(/**mapStateToProps*/, /*mapDispatchToProps*/)(/* Component */);
+export default connect(null, { dispatchAddList: addTodo})(TodoForm);
