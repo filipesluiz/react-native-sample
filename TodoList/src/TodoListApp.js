@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {createStore} from 'redux';
-import {Provider} from 'react-redux'
+import {Provider} from 'react-redux';
+import devToolsEnhancer from 'remote-redux-devtools';
 
 import TodoForm from './components/TodoForm';
 import rootReducer from './reducers'; //read from index.js
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, devToolsEnhancer()); //devToolsEnhancer is to do debug redux
 
 export default class TodoListApp extends React.Component {
   render(){
