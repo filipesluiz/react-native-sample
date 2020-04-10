@@ -3,5 +3,5 @@ import TodoListReducer from './todoListReducer'
 
 
 export default combineReducers({
-    list: TodoListReducer
-});
+    todos: TodoListReducer
+}); //Reducer retorne object with name 'todos'

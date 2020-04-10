@@ -8,15 +8,21 @@ class TodoForm extends React.Component {
         taskValue: ''
     }
     
+    onPress(){
+        this.props.dispatchAddList(this.state.taskValue);
+        this.refs['todoInput'].clear();//Clean the text from input
+    }
+
     render(){
         //const [taskValue, onChangeTaskValue] = React.useState('');
         return (
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
-                    <TextInput style={styles.input} onChangeText={text => {this.setState({taskValue:text})}} />
+                    <TextInput ref="todoInput" style={styles.input} 
+                    onChangeText={text => {this.setState({taskValue:text});}}/>
                 </View>
                 <View style={styles.buttomContainer}>
-                    <Button onPress={() => this.props.dispatchAddList(this.state.taskValue)} title="Add" color="#3f91d1"/>
+                    <Button onPress={() => {this.onPress()}} title="Add" color="#3f91d1"/>
                 </View>
             </View>
         );
