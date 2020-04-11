@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';
-import TodoListReducer from './todoListReducer'
-
+import todoListReducer from './todoListReducer';
+import editTodoReducer from './editTodoReducer';
 
 export default combineReducers({
-    todos: TodoListReducer
-}); //Reducer retorne object with name 'todos'
+    todos: todoListReducer,
+    editTodo: editTodoReducer
+}); //Reducer retorne object with name 'todos' = array

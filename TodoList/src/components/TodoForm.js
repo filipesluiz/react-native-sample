@@ -1,15 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, Button} from 'react-native';
 import {connect} from 'react-redux';
-import {addTodo} from '../actions';
+import {addTodo, setTodoText} from '../actions';
 
 class TodoForm extends React.Component {
-    state = {
-        taskValue: ''
-    }
     
     onPress(){
-        this.props.dispatchAddList(this.state.taskValue);
+        this.props.dispatchAddList(this.props.todo.text);
         this.refs['todoInput'].clear();//Clean the text from input
     }
 
@@ -19,7 +16,7 @@ class TodoForm extends React.Component {
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
                     <TextInput ref="todoInput" style={styles.input} 
-                    onChangeText={text => {this.setState({taskValue:text});}}/>
+                    onChangeText={text => {this.props.dispatchSetTodoText(text)}}/>
                 </View>
                 <View style={styles.buttomContainer}>
                     <Button onPress={() => {this.onPress()}} title="Add" color="#3f91d1"/>
@@ -64,5 +61,11 @@ const styles = StyleSheet.create({
 //     dispatchAddList: addTodo
 // }
 
+const mapStateToProps = state =>{
+    return {
+        todo: state.editTodo
+    }
+}
+
 //export default connect(/**mapStateToProps*/, /*mapDispatchToProps*/)(/* Component */);
-export default connect(null, { dispatchAddList: addTodo})(TodoForm);
+export default connect(mapStateToProps, { dispatchAddList: addTodo, dispatchSetTodoText: setTodoText})(TodoForm);

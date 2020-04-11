@@ -6,7 +6,8 @@ import {toggleTodo} from '../actions'
 
 const TodoList = ({todos, dispatchToggleTodo}) => (
     <View>
-        {todos.map(item => <TodoListItem key={item.id} todo={item} onPressTodo={() => dispatchToggleTodo(item.id)}/>)}
+        {todos.map(item => <TodoListItem key={item.id} todo={item} onPressTodo={() => dispatchToggleTodo(item.id)}
+        onLongPress={() => {console.log(item)}}/>)}
     </View>
 );
 

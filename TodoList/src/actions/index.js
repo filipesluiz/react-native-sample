@@ -10,5 +10,11 @@ export const toggleTodo = id => ({
     id
 });
 
+export const SET_TODO_TEXT = 'SET_TODO_TEXT';
+export const setTodoText = text => ({
+    type: SET_TODO_TEXT,
+    text
+});
+
 //to the funcion return a object, it's necessery use '(' and ')'
 //to import, node reads from index.js. 
