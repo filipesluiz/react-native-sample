@@ -3,13 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import devToolsEnhancer from 'remote-redux-devtools';
+//import devToolsEnhancer from 'remote-redux-devtools'; It's dont worked! Proxy error!!!
 
 import TodoForm from './components/TodoForm';
 import rootReducer from './reducers'; //read from index.js
 import TodoList from './components/TodoList';
 
-const store = createStore(rootReducer, devToolsEnhancer()); //devToolsEnhancer is to do debug redux
+//const store = createStore(rootReducer, devToolsEnhancer()); //devToolsEnhancer is to do debug redux, but It's dont worked, Proxy error!!!
+const store = createStore(rootReducer);
 
 export default class TodoListApp extends React.Component {
   render(){
