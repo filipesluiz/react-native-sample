@@ -1,28 +1,34 @@
 import React from 'react';
 import { StyleSheet, View, TextInput, Button} from 'react-native';
 import {connect} from 'react-redux';
-import {addTodo, setTodoText} from '../actions';
+import {addTodo, setTodoText, updateTodo} from '../actions';
 
 class TodoForm extends React.Component {
     
     onPress(){
-        this.props.dispatchAddList(this.props.todo.text);
-        this.refs['todoInput'].clear();//Clean the text from input
-        console.log('call')
+
+        const {todo} = this.props;
+        console.log("onPress:",todo);
+        if(todo.id){
+            this.props.dispatchUpdateTodo(todo);
+        }
+        else{
+            this.props.dispatchAddList(todo.text);
+        }
+       // this.refs['todoInput'].clear();//Clean the text from input
     }
 
     render(){
         //const [taskValue, onChangeTaskValue] = React.useState('');
         const {text, id} = this.props.todo;
-        console.log(text, id);
         return (
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
-                    <TextInput ref="todoInput" style={styles.input} 
+                    <TextInput style={styles.input} 
                     onChangeText={text => {this.props.dispatchSetTodoText(text)}} value={text}/>
                 </View>
                 <View style={styles.buttomContainer}>
-                    <Button onPress={() => {this.onPress()}} title="Add" color="#3f91d1"/>
+                    <Button onPress={() => {this.onPress()}} title={!id ? 'Add' : 'Save'} color="#3f91d1"/>
                 </View>
             </View>
         );
@@ -71,4 +77,7 @@ const mapStateToProps = state =>{
 }
 
 //export default connect(/**mapStateToProps*/, /*mapDispatchToProps*/)(/* Component */);
-export default connect(mapStateToProps, { dispatchAddList: addTodo, dispatchSetTodoText: setTodoText})(TodoForm);
+export default connect(mapStateToProps
+    , { dispatchAddList: addTodo
+        , dispatchSetTodoText: setTodoText
+        , dispatchUpdateTodo: updateTodo})(TodoForm);

@@ -22,5 +22,11 @@ export const setEditTodo = todo => ({
     todo
 });
 
+export const UPDATE_TODO = 'UPDATE_TODO';
+export const updateTodo = todo => ({
+    type: UPDATE_TODO,
+    todo
+});
+
 //to the funcion return a object, it's necessery use '(' and ')'
 //to import, node reads from index.js. 
