@@ -3,7 +3,8 @@ import {StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import LoginScreen from '../src/pages/LoginScreen.js';
+import LoginScreen from '../src/pages/LoginScreen';
+import Main from '../src/pages/Main';
 
 const Stack = createStackNavigator();
 
@@ -13,6 +14,7 @@ class Router extends React.Component {
       <NavigationContainer>
           <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen name="login" component={LoginScreen} options={{title:'Bem Vindo!'}}/>
+            <Stack.Screen name="main" component={Main} options={{title:'Olá!'}}/>
           </Stack.Navigator>
       </NavigationContainer>
     );

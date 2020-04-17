@@ -2,7 +2,7 @@ import React from 'react';
 import {View, TextInput, Button, ActivityIndicator, Text, Alert, StyleSheet} from 'react-native';
 import FormRow from '../components/FormRow';
 import firebase from '../components/firebase';
-import {logUser} from '../redux/actions';
+import {logUser, createUser} from '../redux/actions';
 import {connect} from 'react-redux';
 
 
@@ -16,25 +16,39 @@ class LoginScreen extends React.Component {
         message:''
     }
     
-    createUser(login, password){
+    createUser({login, password}){
         Alert.alert('Criar nova conta', `Deseja realmente criar uma conta com o e-mail: ${login} ?`,//Using template strings
         [
             {text:'Não', onPress: () => console.log('User dont want create account!')},
             {text:'Sim',
                 onPress: () => {
                     this.setState({loading:true});
-                    firebase.auth().createUserWithEmailAndPassword(login, password)
-                    .then(user => {
-                        this.setState({message:"Usuário criado com sucesso!"});
+                    this.props.createUser(login, password)
+                    .then(() => {
+                        this.setState({login:'', password:'', message:"Usuário criado com sucesso!"});
                     }).catch(error => {
                         this.setState({message:error.message});
-                    }).then(user => {
+                    }).then(() => {
                         this.setState({loading:false});
                     });
                 }
             }
         ],
         {cancelable: false})
+    }
+
+    logUser({login, password}){
+        console.log('Logar', login);
+        this.setState({loading:true});
+        //call function logUser of userAction.js by Redux
+        this.props.logUser(login, password)
+        .then(() => {
+            return this.props.navigation.replace('main');
+        }).catch(error => {
+            this.setState({message:error.message});
+        }).then(() => {
+            this.setState({loading:false});
+        });
     }
 
     render(){
@@ -51,10 +65,10 @@ class LoginScreen extends React.Component {
                 </FormRow> 
                 <View style={styles.buttonRow}>
                     <View style={styles.button}>
-                        <Button title="Entrar" onPress={() => {this.setState({loading:true}), this.props.logUser(this.state.login, this.state.password)}}/>
+                        <Button title="Entrar" onPress={() => {this.logUser(this.state)}}/>
                     </View>
                     <View style={styles.button}>
-                        <Button title="Novo" onPress={() => {createUser(this.state.login, this.state.password)}}/>
+                        <Button title="Novo" onPress={() => {this.createUser(this.state)}}/>
                     </View>
                 </View>
                 {this.state.loading ? <ActivityIndicator size="large" color="#ff5959"/>: null}
@@ -76,4 +90,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default connect(null, {logUser})(LoginScreen);
+export default connect(null, {logUser, createUser})(LoginScreen);

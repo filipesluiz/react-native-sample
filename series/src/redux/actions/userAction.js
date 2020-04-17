@@ -19,15 +19,16 @@ const userLogout = () => ({
 
 //Using redux-thunk for execute a assinchronos action. There are too redux-saga. 
 export const logUser = (login, password) => dispatch => {
-    firebase.auth().signInWithEmailAndPassword(login, password)
+    return firebase.auth().signInWithEmailAndPassword(login, password)
         .then(user => {
             const action = userLoginSucesso(user);
             dispatch(action);
-            //setMessage(null);
-        })
-        // .catch(error => {
-        //     setMessage(error.message);
-        // }).then(user => {
-        //     setLoading(false);
-        // });
+        });
+}
+
+export const createUser = (login, password) => dispatch => {
+    return  firebase.auth().createUserWithEmailAndPassword(login, password)
+    .then(user => {
+        dispatch(userLoginSucesso(user));
+    });
 }
