@@ -5,8 +5,6 @@ import firebase from '../components/firebase';
 import {logUser, createUser} from '../redux/actions';
 import {connect} from 'react-redux';
 
-
-
 class LoginScreen extends React.Component {
     
     state = {
@@ -56,8 +54,10 @@ class LoginScreen extends React.Component {
             <View>
                 <FormRow>
                     <TextInput 
-                        placeholder="Login ou E-mail!" autoCompleteType="email" autoFocus={true} 
-                        value={this.state.login} onChangeText={text => this.setState({login:text})}/>
+                        placeholder="seuemail@email.com" autoCompleteType="email" autoFocus={true} 
+                        value={this.state.login} onChangeText={text => this.setState({login:text})} 
+                        keyboardType="email-address" 
+                        autoCapitalize="none"/>
                 </FormRow>    
                 <FormRow>
                     <TextInput placeholder="Senha" secureTextEntry value={this.state.password} 
