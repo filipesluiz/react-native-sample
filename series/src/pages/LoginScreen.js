@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, TextInput, Button, ActivityIndicator, Text, Alert, StyleSheet} from 'react-native';
 import FormRow from '../components/FormRow';
-import firebase from '../components/firebase';
 import {logUser, createUser} from '../redux/actions';
 import {connect} from 'react-redux';
 
@@ -41,7 +40,7 @@ class LoginScreen extends React.Component {
         //call function logUser of userAction.js by Redux
         this.props.logUser(login, password)
         .then(() => {
-            return this.props.navigation.replace('main');
+            return this.props.navigation.replace('series');
         }).catch(error => {
             this.setState({message:error.message});
         }).then(() => {

@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import LoginScreen from '../src/pages/LoginScreen';
-import Main from '../src/pages/Main';
+import SeriesScreen from '../src/pages/SeriesScreen';
 
 const Stack = createStackNavigator();
 
@@ -13,8 +13,8 @@ class Router extends React.Component {
     return (
       <NavigationContainer>
           <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen name="series" component={SeriesScreen} options={{title:'Olá!'}}/>
             <Stack.Screen name="login" component={LoginScreen} options={{title:'Bem Vindo!'}}/>
-            <Stack.Screen name="main" component={Main} options={{title:'Olá!'}}/>
           </Stack.Navigator>
       </NavigationContainer>
     );

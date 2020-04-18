@@ -1,4 +1,4 @@
-import firebase from '../../components/firebase';
+import firebase from '../../components/dao/Firebase';
 
 export const USER_LOGIN = 'USER_LOGIN';    
 const userLogin = (user) => ({
