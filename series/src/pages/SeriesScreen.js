@@ -8,7 +8,7 @@ const SeriesScreen = props => (
     <View>
         <FlatList data={series} renderItem={({item}) => (
             <SerieCard serie={item}/>
-        )} />
+        )} numColumns={2} />
         {/*keyExtractor={item => item.id} It's not necessery because series.json has a key propertie.*/}
 
     </View>

@@ -5,7 +5,7 @@ import styles from './styles';
 const SerieCard = ({serie}) =>(
     <View style={styles.cardContainer}>
         <Text style={styles.card}>
-            {serie.title}
+        {`${serie.key} - ${serie.title}`}
         </Text>
     </View>
 );
