@@ -13,7 +13,7 @@ class Router extends React.Component {
     return (
       <NavigationContainer>
           <Stack.Navigator screenOptions={screenOptions}>
-            <Stack.Screen name="series" component={SeriesScreen} options={{title:'Olá!'}}/>
+            <Stack.Screen name="series" component={SeriesScreen} options={{title:'Séries'}}/>
             <Stack.Screen name="login" component={LoginScreen} options={{title:'Bem Vindo!'}}/>
           </Stack.Navigator>
       </NavigationContainer>
