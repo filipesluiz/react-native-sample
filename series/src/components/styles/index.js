@@ -2,13 +2,17 @@ import {StyleSheet, Dimensions} from 'react-native';
 
 const styles = StyleSheet.create({
     cardContainer:{
-        flex:1,
-        padding:5,
-        height:Dimensions.get("window").width / 2,
+        //flex:1,
+        //paddingLeft:5,
+        //paddingTop:5,
+        padding:2.5,
+        height: Dimensions.get("window").width / 2,
+        width:'50%'
+        //box-sizing:border-box. This property exists by default on React Native
     },
     card:{
         flex:1,
-        borderWidth:1   
+        //borderWidth:1   
     },
     cardTitle:{
         color:'white',
@@ -21,7 +25,7 @@ const styles = StyleSheet.create({
         height:50,
         position:"absolute",
         bottom:0,
-        opacity:0.8,
+        opacity:0.7,
         width:'100%',
         padding:10
     }
