@@ -1,31 +1,26 @@
 import React from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, ScrollView, View, Image} from 'react-native';
 
 import styles from '../components/styles'
+
+const Row = ({label, value}) => (
+    <View style={styles.line}>
+        <Text style={styles.label}>{label}</Text>
+        <Text style={styles.content}>{value}</Text>
+    </View>
+)
 
 export default class SerieDetail extends React.Component {
     render(){
         const {serie} = this.props.route.params;
         return(
-            <View>
-                <Image source={{uri:serie.img}} aspectRatio={1}/>
-                <View style={styles.line}>
-                    <Text style={styles.label}>Título</Text>
-                    <Text style={styles.content}>{serie.title}</Text>
-                </View>
-                <View style={styles.line}>
-                    <Text style={styles.label}>Gênero</Text>
-                    <Text style={styles.content}>{serie.gender}</Text>
-                </View>
-                <View style={styles.line}>
-                    <Text style={styles.label}>Nota</Text>
-                    <Text style={styles.content}>{serie.rate}</Text>
-                </View>
-                <View style={styles.line}>
-                    <Text style={styles.label}>Descrição</Text>
-                    <Text style={styles.content}>{serie.description}</Text>
-                </View>
-            </View>
+            <ScrollView>
+                <Image style={styles.detailImg} source={{uri:serie.img}} aspectRatio={1} resizeMode='contain'/>
+                <Row label={'Título'} value={serie.title}/>
+                <Row label={'Gênero'} value={serie.gender}/>
+                <Row label={'Nota'} value={serie.rate}/>
+                <Row label={'Descrição'} value={serie.description}/>
+            </ScrollView>
         );
     }
 } 

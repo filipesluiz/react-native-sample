@@ -50,6 +50,10 @@ const styles = StyleSheet.create({
     content: {
         flex:4
     },
+    detailImg:{
+        borderRadius:10,
+        margin:5
+    }
 });
 
 export default styles;
