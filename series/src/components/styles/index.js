@@ -28,7 +28,28 @@ const styles = StyleSheet.create({
         opacity:0.7,
         width:'100%',
         padding:10
-    }
+    },
+    line: {
+        flexDirection: 'row',
+        paddingTop: 3,
+        paddingBottom: 3,
+        borderWidth: 1,
+        borderColor: '#C5C5C5',
+    },
+    cell: {
+        fontSize: 15,
+        paddingLeft: 3,
+        borderWidth:1
+        
+    },   
+    label: {
+        fontWeight: "bold",
+        flex: 2,
+        paddingLeft:5
+    },
+    content: {
+        flex:4
+    },
 });
 
 export default styles;

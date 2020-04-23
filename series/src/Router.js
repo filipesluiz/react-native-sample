@@ -16,7 +16,7 @@ class Router extends React.Component {
           <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen name="series" component={SeriesScreen} options={{title:'Séries'}}/>
             <Stack.Screen name="login" component={LoginScreen} options={{title:'Bem Vindo!'}}/>
-            <Stack.Screen name="serie" component={SerieDetailScreen} options={{title:'Série!'}}/>
+            <Stack.Screen name="serie" component={SerieDetailScreen} options={({route}) => ({title:route.params.serie.title})}/>
           </Stack.Navigator>
       </NavigationContainer>
     );
