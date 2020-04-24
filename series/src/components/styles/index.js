@@ -53,6 +53,17 @@ const styles = StyleSheet.create({
     detailImg:{
         borderRadius:10,
         margin:5
+    },
+    lineLongText: {
+        paddingTop: 3,
+        paddingBottom: 3,
+        //borderWidth: 1,
+        //borderColor: '#C5C5C5',
+    },
+    longText:{
+        textAlign:"justify",
+        paddingLeft:5,
+        paddingRight:5
     }
 });
 
