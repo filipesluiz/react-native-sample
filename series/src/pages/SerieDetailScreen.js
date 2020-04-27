@@ -18,7 +18,7 @@ const Row = ({label, value}) => (
 
 function getExpandedText(expanded, text){
     let size = text.length;
-    let defaultSize = 300;
+    const defaultSize = 300;
     let shortText = !expanded && text.length >= defaultSize ? text.substr(0, defaultSize).concat('[...]') : text;
     return shortText;
 }
