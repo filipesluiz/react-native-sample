@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
 //     dispatchAddList: addTodo
 // }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
     return {
         todo: state.editTodo
     }
