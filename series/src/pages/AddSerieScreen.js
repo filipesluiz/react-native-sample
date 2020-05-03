@@ -2,25 +2,27 @@ import React from 'react';
 import {View, Text, TextInput} from 'react-native';
 import FormRow from '../components/FormRow';
 import {useDispatch, useSelector} from 'react-redux';
-import {create, CREATE } from '../redux/actions'
+import {setField} from '../redux/actions'
 
 export default function AddSerieScreen({route}){
     //const [titulo, onChangeTitulo] = React.useState('');
     const dispatch = useDispatch();
-    const serie = useSelector(state => state.serie);
-    console.log(serie.title);
+    var serie = useSelector(state => state.serie);
+    console.log('render: ', serie);
     return (
         <View>
             <FormRow>
                 <TextInput 
                     placeholder="Título" autoFocus={true} 
-                    onChangeText={text => {
-                        serie.title = text; 
-                        dispatch(create(serie));
-                    }}
-                    value={serie.titulo}/>
-                {/* <Text>Teste</Text>     */}
+                    onChangeText={text => dispatch(setField('title', text))}
+                    value={serie.title}/>
             </FormRow>    
+            <FormRow>
+                <TextInput 
+                    placeholder="URL da imagem" 
+                    onChangeText={text => dispatch(setField('img', text))}
+                    value={serie.img}/>
+            </FormRow>  
         </View>
     );
 }

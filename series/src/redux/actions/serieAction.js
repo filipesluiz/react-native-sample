@@ -1,5 +1,6 @@
-export const CREATE = 'CREATE';
-export const create = (serie) => ({
-     type: CREATE,
-     serie
+export const SET_FIELD = 'SET_FIELD';
+export const setField = (field, value) => ({
+     type: SET_FIELD,
+     field,
+     value
 });

@@ -7,12 +7,14 @@ const NOVA_SERIE = {
     description:''
 }
 
-import {CREATE} from '../actions';
+import {SET_FIELD} from '../actions';
 
 export default function(state = NOVA_SERIE, action){
     switch(action.type){
-        case CREATE:{
-            return action.serie ? action.serie : NOVA_SERIE;
+        case SET_FIELD:{
+            const newState = {...state};//clone with spread operator
+            newState[action.field] = action.value;
+            return  newState;
         }
         default:
             return state;
