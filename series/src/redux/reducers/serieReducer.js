@@ -1,7 +1,7 @@
 const NOVA_SERIE = {
     title:'',
     key: "",
-    gender: "",
+    gender: "police",
     rate: 0,
     img:'',        
     description:''

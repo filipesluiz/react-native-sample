@@ -4,3 +4,7 @@ export const setField = (field, value) => ({
      field,
      value
 });
+
+export const save = (serie) => {
+     console.log('save: ', serie);
+}
