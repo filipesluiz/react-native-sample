@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-//import 'firebase/firestore'
+import 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyC07jlc08zjqGMfqWFSWjZY8PP2S4FYJ9c",
@@ -12,4 +12,9 @@ const firebaseConfig = {
   measurementId: "G-ZEJ756N5NG"
 };
 
-export default !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+const firebaseapp = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+const auth = firebaseapp.auth();
+const db = firebaseapp.firestore();
+/*** Warning 'Setting a timer for a long of time' is throw by Firebase Firestore. It's a knowleged bug.  */
+
+export {auth, db}

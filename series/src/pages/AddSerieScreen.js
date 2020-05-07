@@ -5,10 +5,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setField, save} from '../redux/actions'
 
 export default function AddSerieScreen({route}){
-    //const [titulo, onChangeTitulo] = React.useState('');
     const dispatch = useDispatch();
     var serie = useSelector(state => state.serie);
-    console.log('render: ', serie);
     return (
         <KeyboardAvoidingView behavior="padding">
             <ScrollView style={{borderTopWidth:2, borderBottomWidth:2, borderColor:'#d4d0cd'}}>

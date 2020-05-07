@@ -1,5 +1,4 @@
-import firebase from 'firebase';
-import 'firebase/firestore'
+import {auth, db} from '../../components/dao/Firebase';
 
 export const SET_FIELD = 'SET_FIELD';
 export const setField = (field, value) => ({
@@ -9,14 +8,23 @@ export const setField = (field, value) => ({
 });
 
 export const save = (serie) => {
-     const userId = firebase.auth().currentUser.uid;
-     const db = firebase.firestore();
-     
-     db.collection(`users/${userId}/series`).add(serie)
+     const userId = auth.currentUser.uid;
+     /**Using async/await */
+     return async dispatch => {
+          try {
+               return await db.collection(`users/${userId}/series`).add(serie);
+          } catch (error) {
+               console.error("Error adding document!!!", error);
+          }
+     }
+
+     /*db.collection(`users/${userId}/series`).add(serie)
      .then((docRef) => {
           console.log('Serie Saved on DataBase Cloud Firestore!!! ID = ', docRef.id);
      }).catch((error) =>{
           console.error("Error adding document!!!", error);
-     });
-     //firebase.database().ref(`users/${userId}/series`).set(serie);//.then(() => console.log('Série salva!!!!!'));
+     });*/
+
+
+
 }
