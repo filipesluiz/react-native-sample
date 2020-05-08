@@ -7,6 +7,11 @@ export const setField = (field, value) => ({
      value
 });
 
+export const SET_NEW_SERIE = 'SET_NEW_SERIE';
+export const setNewSerie = () => ({
+     type: SET_NEW_SERIE
+});
+
 export const save = (serie) => {
      const userId = auth.currentUser.uid;
      /**Using async/await */

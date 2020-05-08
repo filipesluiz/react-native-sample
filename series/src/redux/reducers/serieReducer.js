@@ -1,4 +1,4 @@
-const NOVA_SERIE = {
+const NEW_SERIE = {
     title:'',
     key: "",
     gender: "police",
@@ -7,14 +7,17 @@ const NOVA_SERIE = {
     description:''
 }
 
-import {SET_FIELD} from '../actions';
+import {SET_FIELD, SET_NEW_SERIE} from '../actions';
 
-export default function(state = NOVA_SERIE, action){
+export default function(state = NEW_SERIE, action){
     switch(action.type){
         case SET_FIELD:{
             const newState = {...state};//clone with spread operator
             newState[action.field] = action.value;
             return  newState;
+        }
+        case SET_NEW_SERIE:{
+            return NEW_SERIE;
         }
         default:
             return state;

@@ -4,7 +4,7 @@ import FormRow from '../components/FormRow';
 import {useDispatch, useSelector} from 'react-redux';
 import {setField, save} from '../redux/actions'
 
-export default function AddSerieScreen({route}){
+export default function AddSerieScreen({route, navigation}){
     const dispatch = useDispatch();
     var serie = useSelector(state => state.serie);
     return (
@@ -45,7 +45,9 @@ export default function AddSerieScreen({route}){
                         value={serie.description}/>
                 </FormRow>  
                 <FormRow>
-                    <Button title="Salvar" onPress={() => dispatch(save(serie))}/>
+                    <Button title="Salvar" onPress={() => dispatch(save(serie)).then(() => {
+                        navigation.goBack();
+                    })}/>
                 </FormRow>
             </ScrollView>
         </KeyboardAvoidingView>
