@@ -15,14 +15,8 @@ export const setNewSerie = () => ({
 export const save = (serie) => {
      const userId = auth.currentUser.uid;
      /**Using async/await */
-     return async dispatch => {
-          try {
-               await db.collection(`users/${userId}/series`).add(serie);
-          } catch (error) {
-               console.error("Error adding document!!!", error);
-          }
-     }
-
+     return async dispatch => await db.collection(`users/${userId}/series`).add(serie);
+     
      /*db.collection(`users/${userId}/series`).add(serie)
      .then((docRef) => {
           console.log('Serie Saved on DataBase Cloud Firestore!!! ID = ', docRef.id);

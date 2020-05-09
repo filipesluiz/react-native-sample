@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, TextInput, Picker, Slider, Text, Button, ScrollView, KeyboardAvoidingView, ActivityIndicator} from 'react-native';
-import FormRow from '../components/FormRow';
+import {View, TextInput, Picker, Slider, Text, Button, ScrollView, KeyboardAvoidingView, ActivityIndicator, Alert} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+
+import FormRow from '../components/FormRow';
 import {setField, save} from '../redux/actions'
 
 export default function AddSerieScreen({route, navigation}){
@@ -48,7 +49,11 @@ export default function AddSerieScreen({route, navigation}){
                 <FormRow>
                     <Button title="Salvar" onPress={async () => {
                             setIsLoading(true);
-                            await dispatch(save(serie));
+                            try {
+                                await dispatch(save(serie));
+                            } catch (error) {
+                                Alert.alert("Erro não esperado!", "Por favor, tente novamente mais tarde!");
+                            }
                             navigation.goBack();
                         }} disabled={isLoading}/>
                 </FormRow>
