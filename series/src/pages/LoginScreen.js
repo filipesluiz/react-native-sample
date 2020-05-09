@@ -64,7 +64,7 @@ class LoginScreen extends React.Component {
                 </FormRow> 
                 <View style={styles.buttonRow}>
                     <View style={styles.button}>
-                        <Button title="Entrar" onPress={() => {this.logUser(this.state)}}/>
+                        <Button title="Entrar" onPress={() => {this.logUser(this.state)}} disabled={this.state.loading}/>
                     </View>
                     <View style={styles.button}>
                         <Button title="Novo" onPress={() => {this.createUser(this.state)}}/>

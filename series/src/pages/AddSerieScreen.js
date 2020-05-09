@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, TextInput, Picker, Slider, Text, Button, ScrollView, KeyboardAvoidingView, Platform} from 'react-native';
+import {View, TextInput, Picker, Slider, Text, Button, ScrollView, KeyboardAvoidingView, ActivityIndicator} from 'react-native';
 import FormRow from '../components/FormRow';
 import {useDispatch, useSelector} from 'react-redux';
 import {setField, save} from '../redux/actions'
 
 export default function AddSerieScreen({route, navigation}){
     const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = React.useState(false);
     var serie = useSelector(state => state.serie);
     return (
         <KeyboardAvoidingView behavior="padding">
@@ -46,10 +47,12 @@ export default function AddSerieScreen({route, navigation}){
                 </FormRow>  
                 <FormRow>
                     <Button title="Salvar" onPress={async () => {
+                            setIsLoading(true);
                             await dispatch(save(serie));
                             navigation.goBack();
-                        }}/>
+                        }} disabled={isLoading}/>
                 </FormRow>
+                {isLoading ? <ActivityIndicator size="large" color="#ff5959"/>: null}    
             </ScrollView>
         </KeyboardAvoidingView>
     );
