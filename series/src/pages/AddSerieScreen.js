@@ -45,9 +45,10 @@ export default function AddSerieScreen({route, navigation}){
                         value={serie.description}/>
                 </FormRow>  
                 <FormRow>
-                    <Button title="Salvar" onPress={() => dispatch(save(serie)).then(() => {
-                        navigation.goBack();
-                    })}/>
+                    <Button title="Salvar" onPress={async () => {
+                            await dispatch(save(serie));
+                            navigation.goBack();
+                        }}/>
                 </FormRow>
             </ScrollView>
         </KeyboardAvoidingView>

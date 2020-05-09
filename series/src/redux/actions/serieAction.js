@@ -17,7 +17,7 @@ export const save = (serie) => {
      /**Using async/await */
      return async dispatch => {
           try {
-               return await db.collection(`users/${userId}/series`).add(serie);
+               await db.collection(`users/${userId}/series`).add(serie);
           } catch (error) {
                console.error("Error adding document!!!", error);
           }
@@ -29,7 +29,4 @@ export const save = (serie) => {
      }).catch((error) =>{
           console.error("Error adding document!!!", error);
      });*/
-
-
-
 }
