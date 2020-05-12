@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {View, FlatList, TouchableOpacity, Image} from 'react-native';
+import {View, FlatList, TouchableOpacity, Image, ActivityIndicator} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import SerieCard from '../components/SerieCard';
@@ -23,6 +23,10 @@ const SeriesScreen = props => {
     });
     
     const series = useSelector(state => state.series);
+
+    if(!series){
+        return (<ActivityIndicator size="large" color="#ff5959"/>);
+    }
 
     return (
         <View>
