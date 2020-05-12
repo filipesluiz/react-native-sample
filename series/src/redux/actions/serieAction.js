@@ -24,3 +24,21 @@ export const save = (serie) => {
           console.error("Error adding document!!!", error);
      });*/
 }
+
+export const ADD_SERIE_TO_STATE = 'ADD_SERIE_TO_STATE';
+
+const addSeriesToState = (series) => ({
+     type:ADD_SERIE_TO_STATE,
+     series
+});
+
+export function findAll(){
+     const userId = auth.currentUser.uid;
+     return dispatch => db.collection(`users/${userId}/series`).get().then(querySnapshot => {
+              var series = [];
+              querySnapshot.forEach(doc => {
+                   series.push({...doc.data(), key:doc.id});
+               });
+               dispatch(addSeriesToState(series));
+          });
+}

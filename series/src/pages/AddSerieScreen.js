@@ -27,9 +27,10 @@ export default function AddSerieScreen({route, navigation}){
                 <FormRow>
                     <Picker selectedValue={serie.gender} 
                         onValueChange={(itemValue, itemIndex) => dispatch(setField('gender', itemValue))}>
-                        <Picker.Item label="Policital" value="police" />
-                        <Picker.Item label="Comédia" value="comedy" />
-                        <Picker.Item label="Terror" value="horror" />
+                        <Picker.Item label="Policial" value="Policial" />
+                        <Picker.Item label="Comédia" value="Comédia" />
+                        <Picker.Item label="Ficção Científica" value="Ficção Científica" />
+                        <Picker.Item label="Terror" value="Terror" />
                     </Picker>
                 </FormRow>
                 <FormRow>

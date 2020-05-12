@@ -1,11 +1,10 @@
-import React from 'react';
-import {Text, View, FlatList, TouchableOpacity, Image} from 'react-native';
-import {useDispatch} from 'react-redux';
+import React, { useEffect } from 'react';
+import {View, FlatList, TouchableOpacity, Image} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
-import series from '../../series.json';
 import SerieCard from '../components/SerieCard';
 import style from '../components/styles'
-import {setNewSerie} from '../redux/actions'
+import {setNewSerie, findAll} from '../redux/actions'
 
 const BtnAddSerie = ({onNavigation}) => (
     <TouchableOpacity style={[style.cardContainer]} onPress={onNavigation}>
@@ -18,6 +17,13 @@ const BtnAddSerie = ({onNavigation}) => (
 
 const SeriesScreen = props => {
     const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(findAll());
+    });
+    
+    const series = useSelector(state => state.series);
+
     return (
         <View>
             <FlatList data={[...series, {key:series.length.toString(), isLast: true}]} renderItem={({item, index}) => {
