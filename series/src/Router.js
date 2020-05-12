@@ -18,7 +18,8 @@ class Router extends React.Component {
             <Stack.Screen name="login" component={LoginScreen} options={{title:'Bem Vindo!'}}/>
             <Stack.Screen name="series" component={SeriesScreen} options={{title:'Séries'}}/>
             <Stack.Screen name="serie" component={SerieDetailScreen} options={({route}) => ({title:route.params.serie.title})}/>
-            <Stack.Screen name="addSerie" component={AddSerieScreen} options={{title:'Nova Série'}}/>
+            <Stack.Screen name="addSerie" component={AddSerieScreen} 
+              options={({route}) => route.params ? {title:`Editar ${route.params.serie.title}`} : {title:'Nova Série'}}/>
           </Stack.Navigator>
       </NavigationContainer>
     );

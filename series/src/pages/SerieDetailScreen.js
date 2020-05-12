@@ -1,5 +1,5 @@
 import React from 'react';
-import {LayoutAnimation, Platform, UIManager, Text, ScrollView, View, Image, TouchableWithoutFeedback} from 'react-native';
+import {LayoutAnimation, Platform, UIManager, Text, ScrollView, View, Image, TouchableWithoutFeedback, Button} from 'react-native';
 
 import styles from '../components/styles'
 
@@ -23,7 +23,7 @@ function getExpandedText(expanded, text){
     return shortText;
 }
 
-export default function SerieDetail({route}) {
+export default function SerieDetail({route, navigation}) {
     const {serie} = route.params;
     const [expanded, setExpanded] = React.useState(false);
 
@@ -42,6 +42,7 @@ export default function SerieDetail({route}) {
                     <Text style={styles.longText}>{getExpandedText(expanded, serie.description)}</Text>
                 </View>
             </TouchableWithoutFeedback>
+            <Button title="Editar" onPress={() => navigation.navigate('addSerie', {serie:serie})}/>
         </ScrollView>
     );
 } 

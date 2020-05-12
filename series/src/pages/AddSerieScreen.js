@@ -8,7 +8,9 @@ import {setField, save} from '../redux/actions'
 export default function AddSerieScreen({route, navigation}){
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = React.useState(false);
-    var serie = useSelector(state => state.serie);
+    
+    var serie = route.params ? route.params.serie : useSelector(state => state.serie);
+
     return (
         <KeyboardAvoidingView behavior="padding">
             <ScrollView style={{borderTopWidth:2, borderBottomWidth:2, borderColor:'#d4d0cd'}}>
