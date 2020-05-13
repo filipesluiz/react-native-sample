@@ -12,10 +12,20 @@ export const setNewSerie = () => ({
      type: SET_NEW_SERIE
 });
 
+export const SET_EDIT_SERIE = 'SET_EDIT_SERIE';
+export const setEditSerie = (serie) => ({
+     type: SET_EDIT_SERIE,
+     serie
+});
+
 export const save = (serie) => {
      const userId = auth.currentUser.uid;
      /**Using async/await */
-     return async dispatch => await db.collection(`users/${userId}/series`).add(serie);
+     
+
+     return async dispatch => serie.key 
+     ? await db.collection(`users/${userId}/series`).doc(serie.key).set(serie) 
+     : await db.collection(`users/${userId}/series`).add(serie);
      
      /*db.collection(`users/${userId}/series`).add(serie)
      .then((docRef) => {
@@ -26,6 +36,7 @@ export const save = (serie) => {
 }
 
 export const ADD_SERIE_TO_STATE = 'ADD_SERIE_TO_STATE';
+export const RESET = 'RESET';
 
 const addSeriesToState = (series) => ({
      type:ADD_SERIE_TO_STATE,

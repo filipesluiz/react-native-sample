@@ -7,7 +7,7 @@ const NEW_SERIE = {
     description:''
 }
 
-import {SET_FIELD, SET_NEW_SERIE} from '../actions';
+import {SET_FIELD, SET_NEW_SERIE, SET_EDIT_SERIE} from '../actions';
 
 export default function(state = NEW_SERIE, action){
     switch(action.type){
@@ -18,6 +18,9 @@ export default function(state = NEW_SERIE, action){
         }
         case SET_NEW_SERIE:{
             return NEW_SERIE;
+        }
+        case SET_EDIT_SERIE:{
+            return action.serie;
         }
         default:
             return state;

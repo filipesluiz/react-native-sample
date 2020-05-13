@@ -1,16 +1,25 @@
-import React from 'react';
-import {View, TextInput, Picker, Slider, Text, Button, ScrollView, KeyboardAvoidingView, ActivityIndicator, Alert} from 'react-native';
+import React, { useEffect } from 'react';
+import {View, TextInput, Picker, Slider, Text, Button, ScrollView, KeyboardAvoidingView, ActivityIndicator, Alert, useEff} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import FormRow from '../components/FormRow';
-import {setField, save} from '../redux/actions'
+import {setField, save, setEditSerie, RESET} from '../redux/actions'
 
 export default function AddSerieScreen({route, navigation}){
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = React.useState(false);
     
-    var serie = route.params ? route.params.serie : useSelector(state => state.serie);
+    if(route.params){
+        dispatch(setEditSerie(route.params.serie));//Set param serie on state for to edit
+        route.params = null; //for to execute only fist access. 
+    }
 
+    useEffect(() =>{
+        return () => {dispatch({type:RESET})}//It's execute on componentWillUnmount and It's for return the items from database
+    })
+    
+    var serie = useSelector(state => state.serie);
+    
     return (
         <KeyboardAvoidingView behavior="padding">
             <ScrollView style={{borderTopWidth:2, borderBottomWidth:2, borderColor:'#d4d0cd'}}>
@@ -57,7 +66,7 @@ export default function AddSerieScreen({route, navigation}){
                             } catch (error) {
                                 Alert.alert("Erro não esperado!", "Por favor, tente novamente mais tarde!");
                             }
-                            navigation.goBack();
+                            navigation.navigate("series");
                         }} disabled={isLoading}/>
                 </FormRow>
                 {isLoading ? <ActivityIndicator size="large" color="#ff5959"/>: null}    

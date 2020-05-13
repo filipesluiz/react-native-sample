@@ -24,6 +24,7 @@ function getExpandedText(expanded, text){
 }
 
 export default function SerieDetail({route, navigation}) {
+    console.log("8888888888888888888   call ");
     const {serie} = route.params;
     const [expanded, setExpanded] = React.useState(false);
 
