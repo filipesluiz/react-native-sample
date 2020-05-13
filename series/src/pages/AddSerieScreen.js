@@ -66,6 +66,7 @@ export default function AddSerieScreen({route, navigation}){
                             } catch (error) {
                                 Alert.alert("Erro não esperado!", "Por favor, tente novamente mais tarde!");
                             }
+                            //navigation.goBack();
                             navigation.navigate("series");
                         }} disabled={isLoading}/>
                 </FormRow>

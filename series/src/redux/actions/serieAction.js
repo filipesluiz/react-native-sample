@@ -45,6 +45,14 @@ const addSeriesToState = (series) => ({
 
 export function findAll(){
      const userId = auth.currentUser.uid;
+     /** Using listener, ocorrurs performance problem **/
+     // return dispatch => db.collection(`users/${userId}/series`).onSnapshot(function(snapshot){
+     //      var series = [];
+     //      snapshot.forEach(doc => {
+     //           series.push({...doc.data(), key:doc.id});
+     //      });
+     //      dispatch(addSeriesToState(series));
+     // });
      return dispatch => db.collection(`users/${userId}/series`).get().then(querySnapshot => {
               var series = [];
               querySnapshot.forEach(doc => {
