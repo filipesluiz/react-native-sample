@@ -61,3 +61,10 @@ export function findAll(){
                dispatch(addSeriesToState(series));
           });
 }
+
+export const remove = (serie) => {
+     const userId = auth.currentUser.uid;
+     return dispatch => {
+          return db.collection(`users/${userId}/series`).doc(serie.key).delete();
+     } 
+}
