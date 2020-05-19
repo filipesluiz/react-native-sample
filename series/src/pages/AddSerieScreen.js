@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import {View, TextInput, Picker, Slider, Text, Button, ScrollView, KeyboardAvoidingView, ActivityIndicator, Alert, useEff} from 'react-native';
+import {View, TextInput, Picker, Slider, Text, Button, ScrollView
+    , KeyboardAvoidingView, ActivityIndicator, Alert, Image} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import * as ImagePicker from 'expo-image-picker';
@@ -8,11 +9,9 @@ import * as Permissions from 'expo-permissions';
 import FormRow from '../components/FormRow';
 import {setField, save, setEditSerie, RESET} from '../redux/actions'
 
-async function pickImage(){
+async function pickImage(dispatch){
     const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA);
-    console.log("status = ", status);
     if(status !== 'granted'){
-        console.log("não permitiu");
         Alert.alert("É necessário permitir o acesso para selecionar uma imagem ou usar a camera!");
         return;
     }
@@ -24,11 +23,8 @@ async function pickImage(){
     });
 
     if(!result.cancelled){
-        console.log('Imagem selecionada', result.base64);
+        dispatch(setField('img', result.base64));
     }
-
-    console.log("permitiu");
-
 }
 
 export default function AddSerieScreen({route, navigation}){
@@ -56,11 +52,8 @@ export default function AddSerieScreen({route, navigation}){
                         value={serie.title}/>
                 </FormRow>    
                 <FormRow>
-                    <TextInput 
-                        placeholder="URL da imagem" 
-                        onChangeText={text => dispatch(setField('img', text))}
-                        value={serie.img}/>
-                    <Button title="Selecione uma Imagem" onPress={() => pickImage()}/>
+                    <Image aspectRatio={1} resizeMode='contain' source={{uri:`data:image/jpeg;base64,${serie.img}`}}/>
+                    <Button title="Selecione uma Imagem" onPress={() => pickImage(dispatch)}/>
                 </FormRow>  
                 <FormRow>
                     <Picker selectedValue={serie.gender} 
