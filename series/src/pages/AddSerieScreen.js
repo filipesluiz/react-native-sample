@@ -2,8 +2,34 @@ import React, { useEffect } from 'react';
 import {View, TextInput, Picker, Slider, Text, Button, ScrollView, KeyboardAvoidingView, ActivityIndicator, Alert, useEff} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
+
 import FormRow from '../components/FormRow';
 import {setField, save, setEditSerie, RESET} from '../redux/actions'
+
+async function pickImage(){
+    const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA);
+    console.log("status = ", status);
+    if(status !== 'granted'){
+        console.log("não permitiu");
+        Alert.alert("É necessário permitir o acesso para selecionar uma imagem ou usar a camera!");
+        return;
+    }
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes:ImagePicker.MediaTypeOptions.Images,
+        base64:true,
+        quality:0.5
+    });
+
+    if(!result.cancelled){
+        console.log('Imagem selecionada', result.base64);
+    }
+
+    console.log("permitiu");
+
+}
 
 export default function AddSerieScreen({route, navigation}){
     const dispatch = useDispatch();
@@ -34,6 +60,7 @@ export default function AddSerieScreen({route, navigation}){
                         placeholder="URL da imagem" 
                         onChangeText={text => dispatch(setField('img', text))}
                         value={serie.img}/>
+                    <Button title="Selecione uma Imagem" onPress={() => pickImage()}/>
                 </FormRow>  
                 <FormRow>
                     <Picker selectedValue={serie.gender} 

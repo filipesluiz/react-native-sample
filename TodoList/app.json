@@ -22,7 +22,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.filipesluiz.sampletodo",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.filipesluiz.sampletodo",
+      "versionCode": 1
     }
   }
 }
