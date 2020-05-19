@@ -19,7 +19,7 @@ const SeriesScreen = props => {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(findAll());
+        dispatch(findAll(false));
     });
     
     const series = useSelector(state => state.series);

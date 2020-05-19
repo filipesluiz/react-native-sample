@@ -38,14 +38,15 @@ export const save = (serie) => {
 export const ADD_SERIE_TO_STATE = 'ADD_SERIE_TO_STATE';
 export const RESET = 'RESET';
 
-const addSeriesToState = (series) => ({
+const addSeriesToState = (series, reload) => ({
      type:ADD_SERIE_TO_STATE,
-     series
+     series, 
+     reload
 });
 
-export function findAll(){
+export function findAll(reload){
      const userId = auth.currentUser.uid;
-     /** Using listener, ocorrurs performance problem **/
+     /** Using listener, ocorrurs performance problem. Firebase version 7.14.4 **/
      // return dispatch => db.collection(`users/${userId}/series`).onSnapshot(function(snapshot){
      //      var series = [];
      //      snapshot.forEach(doc => {
@@ -58,7 +59,7 @@ export function findAll(){
               querySnapshot.forEach(doc => {
                    series.push({...doc.data(), key:doc.id});
                });
-               dispatch(addSeriesToState(series));
+               dispatch(addSeriesToState(series, reload));
           });
 }
 

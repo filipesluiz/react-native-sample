@@ -5,7 +5,7 @@ import {LayoutAnimation, Platform, UIManager, Text, ScrollView
 import {useDispatch} from 'react-redux';
 
 import styles from '../components/styles'
-import {remove, RESET} from '../redux/actions';
+import {remove, RESET, findAll} from '../redux/actions';
 
 if (Platform.OS === 'android') {
     if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -35,6 +35,7 @@ function deleteSerie(navigation, dispatch, serie) {
                     dispatch(remove(serie))
                         .then(() => {
                             Alert.alert("Série!", `A Série ${serie.title} foi deletada!`);
+                            dispatch(findAll(true));
                             navigation.goBack();
                         })
                         .catch(error => {
@@ -53,13 +54,13 @@ export default function SerieDetail({route, navigation}) {
     const [expanded, setExpanded] = React.useState(false);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        return () => dispatch({type:RESET});//For reloed series
-    });
+    // useEffect(() => {
+    //     return () => dispatch({type:RESET});//For reloed series
+    // });
 
     return (
         <ScrollView>
-            <Image style={styles.detailImg} source={{uri:serie.img}} aspectRatio={1} resizeMode='contain'/>
+            <Image style={styles.detailImg} source={{uri:`data:image/jpeg;base64,${serie.img}`}} aspectRatio={1} resizeMode='contain'/>
             <Row label={'Título'} value={serie.title}/>
             <Row label={'Gênero'} value={serie.gender}/>
             <Row label={'Nota'} value={serie.rate}/>

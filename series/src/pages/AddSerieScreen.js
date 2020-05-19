@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 
 import FormRow from '../components/FormRow';
-import {setField, save, setEditSerie, RESET} from '../redux/actions'
+import {setField, save, setEditSerie, RESET, findAll} from '../redux/actions'
 
 async function pickImage(dispatch){
     const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA);
@@ -19,6 +19,8 @@ async function pickImage(dispatch){
     let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes:ImagePicker.MediaTypeOptions.Images,
         base64:true,
+        allowsEditing:true,
+        aspect:[3,4],
         quality:0.5
     });
 
@@ -36,9 +38,9 @@ export default function AddSerieScreen({route, navigation}){
         route.params = null; //for to execute only fist access. 
     }
 
-    useEffect(() =>{
-        return () => {dispatch({type:RESET})}//It's execute on componentWillUnmount and It's for return the items from database
-    })
+    // useEffect(() =>{
+    //     return () => {dispatch({type:RESET})}//It's execute on componentWillUnmount and It's for return the items from database
+    // })
     
     var serie = useSelector(state => state.serie);
     
@@ -87,6 +89,7 @@ export default function AddSerieScreen({route, navigation}){
                                 Alert.alert("Erro não esperado!", "Por favor, tente novamente mais tarde!");
                             }
                             //navigation.goBack();
+                            dispatch(findAll(true));
                             navigation.navigate("series");
                         }} disabled={isLoading}/>
                 </FormRow>
