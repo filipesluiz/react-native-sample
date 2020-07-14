@@ -21,7 +21,7 @@ function AppContainer() {
 const screenOptions = { 
   home:{
     title:'Pessoas',
-    headerTintColor: 'white', /** arrow button back stack navigator **/
+    headerTintColor: 'white', /**  arrow button back stack navigator  **/
     headerStyle:{
       backgroundColor: '#5eb5f2',
       borderBottomWidth: 1,
